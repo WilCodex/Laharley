@@ -1,0 +1,143 @@
+<div class="contact">
+  <h2 class="contact__title" id="contact">Contacto</h2>
+  <div class="form__container">
+    <form action="https://formbold.com/s/67GZA" method="POST" class="form">
+      <div class="">
+        <label for="name" class="form__name"> Nombre </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          required
+          placeholder="Nombre"
+          class="form__input"
+        />
+      </div>
+      <div class="">
+        <label for="email" class="form__email"> Direccion de correo </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="ejemplo@example.com"
+          class="form__input"
+        />
+      </div>
+      <div class="">
+        <label for="name" class="form__name"> Ingrese asunto </label>
+        <input
+          type="text"
+          name="asunto"
+          id="asunto"
+          required
+          placeholder="Asunto"
+          class="form__input"
+        />
+      </div>
+      <div class="">
+        <label for="name" class="form__name"> Mensaje </label>
+        <textarea
+          rows="3"
+          name="message"
+          id="message"
+          required
+          placeholder="Escriba su mensaje"
+        >
+        </textarea>
+      </div>
+      <button type="submit" class="form__submit">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .contact {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .contact__title {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .form__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .form div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .form__input,
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    outline: none;
+    border: 1px solid var(--primary-color);
+    resize: none;
+  }
+  .form__submit {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    color: var(--bg-primary);
+    padding: 0.5rem;
+    background-color: var(--bg-secondary);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    transition: 0.5s ease;
+    font-weight: bold;
+  }
+  .form__submit:hover {
+    color: var(--bg-secondary);
+    border: 1px solid var(--primary-color);
+  }
+  .form__submit::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transition: 0.5s transform ease;
+    background: var(--bg-primary);
+    transform: scaleX(0);
+    border-radius: 0.5rem;
+  }
+  .form__submit:hover::before {
+    transform: scaleX(1);
+  }
+  @media (max-width: 768px) {
+    .form {
+      width: 100%;
+      padding: 0.5rem;
+    }
+  }
+</style>

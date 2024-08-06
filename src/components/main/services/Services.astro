@@ -1,0 +1,147 @@
+---
+import VIDEOS from "../../../JS/Videos.js";
+import THUMBNAILS from "../../../JS/thumbnails.js";
+---
+
+<div class="services__title">
+  <h2 class="title" id="services">Servicios</h2>
+</div>
+<article class="services">
+  <div class="services__one">
+    <div class="services__title hidden__scale">
+      <h3>Videos</h3>
+    </div>
+    <section class="services__content--video">
+      {
+        VIDEOS.map((video) => (
+          <div class="services__video hidden__scale" id={video.id}>
+            <iframe
+              src={video.src}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              sandbox="allow-same-origin allow-scripts"
+            />
+          </div>
+        ))
+      }
+    </section>
+  </div>
+  <div class="services__two">
+    <div class="services__title hidden__scale">
+      <h3>Miniaturas</h3>
+    </div>
+    <div class="services__content--img">
+      {
+        THUMBNAILS.map((thumbnail) => (
+          <div class="services__img hidden__scale">
+            <img src={thumbnail.src} alt={thumbnail.alt} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</article>
+<style>
+  .services {
+    display: flex;
+    flex-direction: column;
+  }
+  .services__title {
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+  .services__one {
+    flex: 1;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .services__content--video {
+    width: 100%;
+    columns: 4;
+    column-gap: 1rem;
+    padding: 1rem 1rem 0;
+  }
+  .services__video {
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  iframe {
+    border: none;
+
+    outline: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+  }
+  #horizontal__format {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  #vertical__format {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 9/16;
+  }
+
+  .services__two {
+    flex: 2;
+  }
+  .services__img {
+    flex: 1;
+    overflow: hidden;
+  }
+  .services__content--img {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .services__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    filter: brightness(0.5);
+
+    transition: 0.5s ease;
+  }
+  .services__img img:hover {
+    filter: brightness(1);
+    transform: scale(1.03);
+  }
+  @media screen and (max-width: 1440px) {
+    .services__content--img {
+      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    }
+  }
+  @media screen and (max-width: 1280px) {
+    .services__content--img {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .services__content--video {
+      columns: 2;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .services {
+      flex-direction: column;
+    }
+    .services__content--video {
+      columns: 1;
+      max-width: 100%;
+      padding: 0.5rem;
+    }
+    .services__content--img {
+      padding: 0.5rem;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>

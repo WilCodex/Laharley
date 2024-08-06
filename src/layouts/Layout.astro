@@ -1,0 +1,79 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="La Harley video editor" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/icon" href="/favicon.webp" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  :root {
+    --bg-primary: white;
+    --bg-secondary: #141414;
+    --primary-color: #db2784cc;
+  }
+  .dark__theme {
+    --bg-primary: #141414;
+    --bg-secondary: white;
+    --primary-color: white;
+  }
+  @font-face {
+    font-family: "Playfair Display";
+    src: url("../fonts\Playfair_Display\PlayfairDisplay-VariableFont_wght.ttf");
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    font-family: Playfair Display;
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--bg-primary);
+    color: var(--bg-secondary);
+  }
+  .hidden {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 2s;
+  }
+  .hidden__reversed {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 2s;
+  }
+  .hidden__scale {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.5s ease;
+  }
+  .show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .show__scale {
+    opacity: 1;
+    transform: scale(1);
+  }
+  @media (prefers-reduced-motion) {
+    .hidden {
+      transition: none;
+    }
+  }
+</style>
+<script type="module" src="/src/JS/scrollAnimations.js"></script>

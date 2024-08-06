@@ -1,0 +1,199 @@
+<nav class="nav">
+  <div class="logo">
+    <a href="/">
+      <h2>La Harley</h2>
+    </a>
+  </div>
+  <ul class="nav__links">
+    <li><a href="/" class="link">Inicio</a></li>
+    <li><a href="#services" class="link">Servicios</a></li>
+    <li><a href="#contact" class="link">Contacto</a></li>
+  </ul>
+  <div class="dark__mode">
+    <img src="/src/icons/moon.svg" alt="moon" class="dark__toggle" />
+  </div>
+  <div class="hamburger__menu">
+    <img src="/src/icons/hamburger.svg" alt="menu" />
+  </div>
+  <div class="nav__mobile hidden__scale">
+    <div class="close__menu">
+      <img src="/src/icons/close.svg" alt="close" />
+    </div>
+    <ul class="nav__mobile--container">
+      <li><a href="/" class="link">Inicio </a></li>
+      <li><a href="#services" class="link">Servicios</a></li>
+      <li><a href="#contact" class="link">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+<style>
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .nav {
+    padding: 0.5rem;
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+    background: var(--bg-primary);
+  }
+  .logo {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: var(--primary-color);
+    cursor: pointer;
+  }
+  .hamburger__menu {
+    height: 50px;
+    display: none;
+  }
+  .close__menu {
+    height: 50px;
+  }
+  .hamburger__menu img,
+  .close__menu img {
+    height: 100%;
+    display: block;
+  }
+  .nav__mobile {
+    display: none;
+    position: fixed;
+    background-color: var(--bg-primary);
+    top: 0;
+    right: 0;
+    height: 50vh;
+    width: 40vw;
+    z-index: 20;
+    padding: 0.5rem;
+  }
+  .nav__mobile--container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .nav__links {
+    flex: 3;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+  }
+  .dark__mode {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .dark__mode img {
+    height: 100%;
+  }
+
+  .link {
+    color: var(--primary-color);
+    font-weight: bold;
+    padding: 0.25rem;
+    position: relative;
+    z-index: 1;
+  }
+  .link:hover {
+    color: var(--bg-primary);
+  }
+  .link:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform-origin: left;
+    transition: 0.5s transform ease;
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    transform: scaleX(0);
+  }
+  .link:hover:before {
+    transform: scaleX(1);
+  }
+  @media (max-width: 768px) {
+    .nav__links {
+      display: none;
+    }
+    .hamburger__menu {
+      display: block;
+      position: fixed;
+      top: 0;
+      right: 1%;
+      z-index: 20;
+    }
+    .nav__mobile {
+      flex-direction: column;
+      align-items: end;
+    }
+    .nav__mobile--container {
+      text-transform: uppercase;
+      list-style: none;
+    }
+  }
+  .close__hamburguer {
+    display: none;
+  }
+  .open__nav {
+    display: flex;
+  }
+</style>
+<script>
+  const HAMBURGER_MENU = document.querySelector(".hamburger__menu");
+  const CLOSE_MENU = document.querySelector(".close__menu");
+  const NAV_MOBILE = document.querySelector(".nav__mobile");
+  const DARK_TOGGLE = document.querySelector(
+    ".dark__toggle"
+  ) as HTMLImageElement;
+  HAMBURGER_MENU.addEventListener("click", () => {
+    HAMBURGER_MENU.classList.add("close__hamburguer");
+    NAV_MOBILE.classList.add("open__nav");
+  });
+  CLOSE_MENU.addEventListener("click", () => {
+    HAMBURGER_MENU.classList.remove("close__hamburguer");
+    NAV_MOBILE.classList.remove("open__nav");
+  });
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme) {
+    // Si el tema está guardado, aplica el tema correspondiente
+    document.body.classList.toggle("dark__theme", savedTheme === "dark");
+    DARK_TOGGLE.src =
+      savedTheme === "dark" ? "/src/icons/sun.svg" : "/src/icons/moon.svg";
+  }
+
+  // Agrega un evento de clic al botón de cambio de tema
+  DARK_TOGGLE.addEventListener("click", () => {
+    // Alterna entre los temas claro y oscuro
+    document.body.classList.toggle("dark__theme");
+
+    // Guarda el tema actual en el almacenamiento local
+    const currentTheme = document.body.classList.contains("dark__theme")
+      ? "dark"
+      : "light";
+    localStorage.setItem("theme", currentTheme);
+
+    // Actualiza el icono del botón de cambio de tema
+    DARK_TOGGLE.src = document.body.classList.contains("dark__theme")
+      ? "/src/icons/sun.svg"
+      : "/src/icons/moon.svg";
+  });
+</script>
